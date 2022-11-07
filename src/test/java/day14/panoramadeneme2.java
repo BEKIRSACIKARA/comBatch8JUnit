@@ -17,7 +17,7 @@ import java.time.Duration;
 
 public class panoramadeneme2 {
     @Test
-    public void panoramadenemeTest1() throws IOException {
+    public void panoramadenemeTest1() throws IOException, InterruptedException {
         // System.setProperty("webdriver.chrome.driver", "src/resources/drivers/chromedriver.exe");
 
         WebDriverManager.chromedriver().setup();
@@ -29,11 +29,19 @@ public class panoramadeneme2 {
         kullaniciadi.sendKeys("dileksugida3");
         WebElement kullanicisifre = driver.findElement(By.id("edtPass"));
         kullanicisifre.sendKeys("Ebn102030" + Keys.ENTER);
+        Thread.sleep(1000);
         driver.findElement(By.id("ctl09_lblCloseText")).click();
+        Thread.sleep(1000);
+        Actions actions = new Actions(driver);
+        WebElement müsteri = driver.findElement(By.id("txtSearch"));
+        müsteri.sendKeys("Müşteri");
+        Thread.sleep(2000);
+        actions.sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
+        Thread.sleep(1000);
         //driver.findElement(By.className("col-xs-2 col-sm-2 col-lg-2 col-xl-2 tab-item active")).click();
 
 
-        //driver.findElement(By.xpath("//*[text()='Tanımlamalar']")).click();
+
         //driver.findElement(By.xpath("//*[text()='Müşteri']")).click();
 
 
@@ -45,17 +53,36 @@ public class panoramadeneme2 {
         int sonSatir = workbook.getSheet("Sayfa1").getLastRowNum();
         System.out.println("Satır sayısı = " + sonSatir);
         String carikodlar = "";
-        for (int i = 0; i <= sonSatir; i++) {
+        Actions actions1 = new Actions(driver);
+        //Thread.sleep(5000);
+        actions1.sendKeys(Keys.ARROW_UP);
+      Thread.sleep(3000);
+       actions1.sendKeys(Keys.TAB);
+       Thread.sleep(3000);
+       actions1.sendKeys(Keys.TAB);
+        Thread.sleep(3000);
+        actions1.sendKeys(Keys.TAB)
+        .perform();
+
+       Thread.sleep(3000);
+        for (int i = 0; i <= 0; i++) {//sonSatir
             carikodlar = workbook.getSheet("Sayfa1").getRow(i).getCell(0).toString();
-            Actions actions = new Actions(driver);
-            WebElement müsteri = driver.findElement(By.id("txtSearch"));
-            müsteri.sendKeys("Müşteri" + Keys.ENTER);
-            actions.sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
-            //actions.moveToElement("");
-            //driver.findElement(By.id("igtxtListGrid_edtTxt_TE")).click();
+            Actions actions2 = new Actions(driver);
+            actions2.sendKeys(carikodlar+Keys.ENTER).perform();
+           driver.findElement(By.xpath("//*[text()='Düzenle']")).click();
+          //  Actions actions3 = new Actions(driver);
+           // actions3.sendKeys(Keys.F2).perform();
+         //   WebElement duzenle=driver.findElement(By.xpath("//*[@id='igtxtListGrid_edtTxt_TE']"));
+        //    duzenle.click();
+            Thread.sleep(1000);
+
+            // actions.moveToElement();
+
+            // driver.findElement(By.xpath("//*[@id='ListGrid_R1C3FltBtn']")).click();
             //kod.sendKeys(carikodlar + Keys.ENTER);
 
         }
+
 
     }
 }
