@@ -1,4 +1,4 @@
-package utilities;
+package day12.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
